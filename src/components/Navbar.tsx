@@ -16,12 +16,15 @@ const Navbar = () => {
             starter theme
           </a>
 
-          {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <a
                 key={link}
                 href={`#${link.toLowerCase()}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById(link.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
+                }}
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
                 {link}
@@ -52,7 +55,6 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile menu */}
         {isOpen && (
           <div className="md:hidden py-4 border-t">
             <div className="flex flex-col gap-4">
@@ -61,7 +63,11 @@ const Navbar = () => {
                   key={link}
                   href={`#${link.toLowerCase()}`}
                   className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setIsOpen(false);
+                    document.getElementById(link.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
+                  }}
                 >
                   {link}
                 </a>
